@@ -128,3 +128,15 @@ remove
 
 
 
+【ＰＨＰのヘッダーやフッターの共通化】
+<?php include "header.php";?>　インクルード　ヘッダー
+<?php include "footer.php";?>　インクルード　フッダー
+
+
+
+
+
+【HTMLのページ内リンク】
+ページ内リンク
+<a href="#sample">ここからジャンプします。</a>
+<h2 id="sample">ここにジャンプします</h2>
