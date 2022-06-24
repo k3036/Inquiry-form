@@ -1,3 +1,4 @@
+<?php session_start();?>
 <!DOCTYPE html>
 <html>
 
@@ -16,6 +17,32 @@
 </head>
 
 <body>
+  <?php function XssOCuntermeasure($XssMeasures){
+            echo htmlspecialchars($XssMeasures, ENT_QUOTES, "UTF-8") ;
+        }
+  ?>
+  <?php
+  /**スーパーグローバル変数を使うときの最初の記述 */
+  /**ファイルの先頭部に書かないとエラーが出る。 */
+  /*
+  if( isset($_SESSION["chineseCharacterName"])){
+  }else{}
+  if( isset($_SESSION["howToRead"])){
+
+  }
+  if( isset($_SESSION["phoneNumber"])){
+
+  }
+  if( isset($_SESSION["emailAddress"])){
+
+  }
+  if( isset($_SESSION["contentsOfInquiry"])){
+
+  }
+  */
+  $Within10Characters = 10 ;
+    ?>
+
   <?php include "inquiryHeader2.php";?>
 
   <main>
@@ -39,14 +66,64 @@
       </div>
 
       <form method="POST" action="confirm.php">
-        <div class="entryName"> <input class="entryPlace" type=" text" name="chineseCharacterName" placeholder="山田 太郎">
+        <div class="entryName">
+          <input value="<?php
+          /**下記if文の記述で初回値なしの際のエラーを消す。これで履歴ができた際のみ反応する。 */
+              if(empty($_SESSION["chineseCharacterName"])){
+
+              }else if(mb_strlen($_SESSION["chineseCharacterName"])>10){
+
+              }else if( isset($_SESSION["chineseCharacterName"])){
+                echo $_SESSION["chineseCharacterName"] ;/**値が入っていれば出力 */
+              }
+            ?>" class=" entryPlace" type=" text" placeholder="山田 太郎" name="chineseCharacterName">
         </div>
-        <div class="entryName2"> <input class="entryPlace" type=" text" name="howToRead" placeholder="ヤマダタロウ"></div>
-        <div class="entryNumber"> <input class="entryPlace" type=" tel" name="phoneNumber" placeholder="09012345678">
+
+
+        <div class="entryName2">
+          <input value="<?php
+          /**下記if文の記述で初回値なしの際のエラーを消す。これで履歴ができた際のみ反応する。 */
+              if(empty($_SESSION["howToRead"])){
+
+              }else if(mb_strlen($_SESSION["howToRead"])>10){
+
+              }else if( isset($_SESSION["howToRead"])){
+                echo $_SESSION["howToRead"] ;/**値が入っていれば出力 */
+              }
+            ?>" class="entryPlace" type=" text" name="howToRead" placeholder="ヤマダタロウ">
         </div>
-        <div class="entryAddress"> <input class="entryPlace" type="email" name="emailAddress"
-            placeholder="test@test.co.jp"></div>
-        <div class="detail"><textarea class="entryDetail" type="" name="contentsOfInquiry"></textarea></div>
+
+
+        <div class="entryNumber">
+          <input value="<?php
+          /**下記if文の記述で初回値なしの際のエラーを消す。これで既定の履歴ができた際のみ反応する。 */
+              if(empty($_SESSION["phoneNumber"])){
+
+              }else if(!preg_match('/^0$|^-?[0-9][0-9]*$/', $_SESSION["phoneNumber"]	)){/**電話番号が半角数字0-9じゃなければ表示しない */
+
+              }else if( isset($_SESSION["phoneNumber"])){
+                echo $_SESSION["phoneNumber"] ;/**値が入っていれば出力 */
+              }/*else{/**入っていなければ空 }*/
+            ?>" class="entryPlace" type=" tel" name="phoneNumber" placeholder="09012345678">
+        </div>
+
+        <div class="entryAddress">
+          <input value="
+          <?php          /**下記if文の記述で初回値なしの際のエラーを消す。これで履歴ができた際のみ反応する。 */
+          $pattern = "/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:.[a-zA-Z0-9-]+)*$/";
+              if(empty($_SESSION["emailAddress"])){
+
+              }else if ($_SESSION["emailAddress"] === $pattern ){
+
+              }else if( isset($_SESSION["emailAddress"])){
+                echo $_SESSION["emailAddress"] ;/**値が入っていれば出力 */
+              }
+            ?>" class="entryPlace" type="email" name="emailAddress" placeholder="test@test.co.jp">
+        </div>
+
+        <div class="detail">
+          <textarea class="entryDetail" type="" name="contentsOfInquiry"></textarea>
+        </div>
 
 
 
@@ -66,7 +143,9 @@
     <div class="footerMove"><?php include "footer.php";?>
     </div>
   </div>
-
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="form0main.js"></script>
 </body>
 
 </html>
