@@ -21,7 +21,18 @@
 
 
 
-  <form action=“index.php” method=“GET”>
+  <form method=“POST”>
+    <?php
+        /*session_start();
+        $session_id = session_id();
+        echo $session_id;*/
+        $referer = $_SERVER["HTTP_REFERER"];
+        $url = 'confirm.php';
+          if(!strstr($referer,$url)){
+            die("正規の画面からアクセスしてください");
+            exit;
+          }
+      ?>
     <div class=contentOfTransmission3>
       <p class="inquirySendCompletely">お問い合わせ</p>
       <p class="inquirySendCompletelyLine"></p>
