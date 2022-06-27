@@ -63,11 +63,15 @@
               $_SESSION["phoneNumber"]		= $_POST["phoneNumber"];  //電話番号
               $_SESSION["emailAddress"]		= $_POST["emailAddress"];  //メールアドレス
               $_SESSION["contentsOfInquiry"]		= $_POST["contentsOfInquiry"];//お問い合わせ内容
-
+              $ten = 10 ;
               if($_SESSION["chineseCharacterName"] === ""){
+                echo "<FONT COLOR=\"RED\">※氏名は必須入力です。１０文字以内でご入力ください。</FONT>" ."</br>";
+              }else if(mb_strlen( $_SESSION["chineseCharacterName"]) >= $ten){
                 echo "<FONT COLOR=\"RED\">※氏名は必須入力です。１０文字以内でご入力ください。</FONT>" ."</br>";
               }
               if($_SESSION["howToRead"] === ""){
+                echo"<FONT COLOR=\"RED\">※フリガナは必須入力です。１０文字以内でご入力ください。</FONT>"."</br>" ;
+              }else if( mb_strlen($_SESSION["howToRead"]) >= $ten){
                 echo"<FONT COLOR=\"RED\">※フリガナは必須入力です。１０文字以内でご入力ください。</FONT>"."</br>" ;
               }
               if($_SESSION["phoneNumber"]	 === ""){
