@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=google">
   <meta name="viewport" content="width = device - width=device-width, initial-scale = 1.0">
   <title>inquiryScreen</title>
-  <link rel="stylesheet" href="form0css.php">
+  <link rel="stylesheet" href="form.css">
   <style type="text/css">
   body {
     margin: 0;
@@ -58,14 +58,14 @@
         <p class="asterisk1">*</p>
         <p class="asterisk2">*</p>
         <p class="asterisk3">*</p>
-        <p class="asterisk4">*</p>
-        <p class="asterisk5">*</p>
+
+
         <div class="fillInTheFollowingItems2">
           <p class="enter">下記の項目をご記入の上送信ボタンを押してください</p>
         </div>
       </div>
 
-      <form method="POST" action="confirm.php">
+      <form method="POST" action="confirm.php" name="inputScreen">
         <div class="entryName">
           <input value="<?php
           /**下記if文の記述で初回値なしの際のエラーを消す。これで履歴ができた際のみ反応する。 */
@@ -76,9 +76,9 @@
               }else if( isset($_SESSION["chineseCharacterName"])){
                 echo $_SESSION["chineseCharacterName"] ;/**値が入っていれば出力 */
               }
-            ?>" class=" entryPlace" type=" text" placeholder="山田 太郎" name="chineseCharacterName">
+            ?>" class=" entryPlace" type=" text" placeholder="山田 太郎" id="chineseCharacterName"
+            name="chineseCharacterName">
         </div>
-
 
         <div class="entryName2">
           <input value="<?php
@@ -90,9 +90,8 @@
               }else if( isset($_SESSION["howToRead"])){
                 echo $_SESSION["howToRead"] ;/**値が入っていれば出力 */
               }
-            ?>" class="entryPlace" type=" text" name="howToRead" placeholder="ヤマダタロウ">
+            ?>" class="entryPlace" type=" text" name="howToRead" placeholder="ヤマダタロウ" id="howToRead">
         </div>
-
 
         <div class="entryNumber">
           <input value="<?php
@@ -100,11 +99,10 @@
               if(empty($_SESSION["phoneNumber"])){
 
               }else if(!preg_match('/^0$|^-?[0-9][0-9]*$/', $_SESSION["phoneNumber"]	)){/**電話番号が半角数字0-9じゃなければ表示しない */
-
               }else if( isset($_SESSION["phoneNumber"])){
                 echo $_SESSION["phoneNumber"] ;/**値が入っていれば出力 */
               }/*else{/**入っていなければ空 }*/
-            ?>" class="entryPlace" type=" tel" name="phoneNumber" placeholder="09012345678">
+            ?>" class="entryPlace" type=" tel" name="phoneNumber" placeholder="09012345678" id="phoneNumber">
         </div>
 
         <div class="entryAddress">
@@ -118,11 +116,11 @@
               }else if( isset($_SESSION["emailAddress"])){
                 echo $_SESSION["emailAddress"] ;/**値が入っていれば出力 */
               }
-            ?>" class="entryPlace" type="email" name="emailAddress" placeholder="test@test.co.jp">
+            ?>" class="entryPlace" type="email" name="emailAddress" placeholder="test@test.co.jp" id="emailAddress">
         </div>
 
         <div class="detail">
-          <textarea class="entryDetail" type="" name="contentsOfInquiry"></textarea>
+          <textarea class="entryDetail" type="" name="contentsOfInquiry" id="contentsOfInquiry"></textarea>
         </div>
 
 
@@ -131,8 +129,9 @@
         <p class="howToRead0">フリガナ</p>
         <p class="fillInThePhoneNumber0">電話番号</p>
         <p class="fillInYourEmailAddress0">メールアドレス</p>
-
-        <input class="submitButton3" type="submit" value="送信">
+        <button class="submitButton3" type="submit" id="btnSubmit">
+          <p class="sendSize2">送 &nbsp;&nbsp;&nbsp; 信</p>
+        </button>
       </form>
 
   </main>
