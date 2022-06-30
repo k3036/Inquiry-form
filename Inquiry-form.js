@@ -1,3 +1,11 @@
+function checkForm(){
+    if(document.form1.input01.value == "" || document.form1.input02.value == ""){
+        alert("必須項目を入力して下さい。");
+	return false;
+    }else{
+	return true;
+    }
+}
 
 jQuery(function() {
     var appear = false;
@@ -24,15 +32,6 @@ jQuery(function() {
       return false;
     });
   });
-
-
-
-
-
-
-
-
-
 
 
 
@@ -134,3 +133,140 @@ $(window).on("load scroll" , function (){
 window.addEventListener('scroll', function(){
     window.scrollY;
 });
+
+
+
+      window.onload = function(){
+      const btnSubmit = document.getElementById('btnSubmit');
+      const chineseCharacterName = document.getElementById('chineseCharacterName');
+      const howToRead = document.getElementById('howToRead');
+      const phoneNumber = document.getElementById('phoneNumber');
+      const emailAddress = document.getElementById('emailAddress');
+      const contentsOfInquiry = document.getElementById('contentsOfInquiry');
+
+      btnSubmit.addEventListener('click', function(event) {
+        /*let message = [];*/
+        /*入力値チェック*/
+
+        if(!phoneNumber.value.match(/^([0-9]{0,})$/)){
+          alert('電話番号は（0～9）の数字で入力してください。') ;
+        }
+
+
+/**  match(/^([0-9]{0,})$/)   [0-9]は0～9までの数字、 {0,}は文字数（桁数）、{5,}なら５文字以上   */
+
+
+
+
+
+
+
+
+
+      if(chineseCharacterName.value =="" && howToRead.value =="" && emailAddress.value =="" && contentsOfInquiry.value ==""){
+          alert("氏名とフリガナとメールアドレスとお問い合わせ内容が未入力です。");
+          /*document.getElementById("btnSubmit").disabled = true;*/
+          event.preventDefault();/**エラー発生時にページ移換せずに再度入力できるようにする */
+        }else if(chineseCharacterName.value =="" && howToRead.value =="" && emailAddress.value ==""){
+        alert("氏名とフリガナとメールアドレスが未入力です。");
+        /*document.getElementById("btnSubmit").disabled = true;*/
+        event.preventDefault();/**エラー発生時にページ移換せずに再度入力できるようにする */
+      }else if(chineseCharacterName.value =="" && emailAddress.value =="" && contentsOfInquiry.value ==""){
+        alert("氏名とメールアドレスとお問い合わせ内容が未入力です。");
+        /*document.getElementById("btnSubmit").disabled = true;*/
+        event.preventDefault();/**エラー発生時にページ移換せずに再度入力できるようにする */
+      }
+      else if(chineseCharacterName.value =="" && contentsOfInquiry.value.value =="" && emailAddress.value ==""){
+        alert("氏名とメールアドレスとお問い合わせ内容が未入力です。");
+        /*document.getElementById("btnSubmit").disabled = true;*/
+        event.preventDefault();/**エラー発生時にページ移換せずに再度入力できるようにする */
+      }else if(contentsOfInquiry.value =="" && howToRead.value =="" && emailAddress.value ==""){
+        alert("フリガナとメールアドレスとお問い合わせ内容が未入力です。");
+        /*document.getElementById("btnSubmit").disabled = true;*/
+        event.preventDefault();/**エラー発生時にページ移換せずに再度入力できるようにする */
+      }else if(chineseCharacterName.value =="" && howToRead.value =="" && contentsOfInquiry.value ==""){
+        alert("氏名とフリガナとお問い合わせ内容が未入力です。");
+        event.preventDefault();/**エラー発生時にページ移換せずに再度入力できるようにする */
+      }else if(chineseCharacterName.value =="" && howToRead.value ==""){
+        alert("氏名とフリガナが未入力です。");
+        event.preventDefault();/**エラー発生時にページ移換せずに再度入力できるようにする */
+      }else if(chineseCharacterName.value =="" && emailAddress.value ==""){
+        alert("氏名とアドレスが未入力です。");
+        event.preventDefault();/**エラー発生時にページ移換せずに再度入力できるようにする */
+      }else if( emailAddress.value =="" && howToRead.value ==""){
+        alert("フリガナとアドレスが未入力です。");
+        event.preventDefault();/**エラー発生時にページ移換せずに再度入力できるようにする */
+      }else if( contentsOfInquiry.value =="" && howToRead.value ==""){
+        alert("お問い合わせ内容とフリガナが未入力です。");
+        event.preventDefault();/**エラー発生時にページ移換せずに再度入力できるようにする */
+      }else if( contentsOfInquiry.value =="" && chineseCharacterName.value ==""){
+        alert("お問い合わせ内容と氏名が未入力です。");
+        event.preventDefault();/**エラー発生時にページ移換せずに再度入力できるようにする */
+      }else if( contentsOfInquiry.value =="" && emailAddress.value ==""){
+        alert("お問い合わせ内容とメールアドレスが未入力です。");
+        event.preventDefault();/**エラー発生時にページ移換せずに再度入力できるようにする */
+      }else if(chineseCharacterName.value ==""){
+        alert("氏名が未入力です。");
+        event.preventDefault();/**エラー発生時にページ移換せずに再度入力できるようにする */
+      }else if(howToRead.value ==""){
+        alert("フリガナが未入力です。");
+        event.preventDefault();
+      }else if(emailAddress.value ==""){/**空チェックok */
+        alert("メールアドレスが未入力です。");
+        event.preventDefault();
+      }else if(contentsOfInquiry.value ==""){
+        alert("お問い合わせ内容が未入力です。");
+        event.preventDefault();/**エラー発生時にページ移換せずに再度入力できるようにする */
+      }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+
+                var phoneNumberRegularExpression0 = /^(|050|070|080|090)0\d{4}0\d{4}$/
+                var phoneNumberRegularExpression =/\A(((0(\d{1}[-(]?\d{4}|\d{2}[-(]?\d{3}|\d{3}[-(]?\d{2}|\d{4}[-(]?\d{1}|[5789]0[-(]?\d{4})[-)]?)|\d{1,4}\-?)\d{4}|0120[-(]?\d{3}[-)]?\d{3})\z/ ;
+                let regex = /^\d{3}-\d{4}-\d{4}$/;
+
+                if( test(phoneNumber === "" )){alert("謎")}
+                  if( test(phoneNumber == phoneNumberRegularExpression0) ){
+                    alert("電話番号は半角数字です。");
+                  }
+                  if( test(phoneNumber ==phoneNumberRegularExpression) ){
+                    alert("電話番号は半角数字です。");
+                  }
+                  if( test(phoneNumber== regex )){
+                    alert("電話番号は半角数字です。");
+                  }
+
+                  if( phoneNumberRegularExpression0 == phoneNumber){
+                    alert("電話番号は半角数字です。");
+                  }
+                          if( regex == phoneNumber) {
+                    alert("電話番号は半角数字です。");
+                  }
+*/
+
+
+
+
+
+
+
+
+    });
+  }
