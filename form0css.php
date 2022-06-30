@@ -1189,16 +1189,23 @@ height : 45px;
 .submitButton3{
 position: relative;
 display: block;
-bottom: -245px;
+bottom: -259px;
 left: 24px;
 border-radius: 10px;
 border: 1px solid black;
 color: white;
 background-color: #CC0066;
+z-index :9 ;
 }
 .submitButton3{
 width : 750px;
 height : 45px;
+}
+.sendCharacter{
+z-index :999 ;
+color : white;
+font-size : 20px ;
+margin :10px ;
 }
 .entryPlace{
 position: relative;
@@ -1461,9 +1468,6 @@ color: white;
 margin-bottom: 181px;;
 }
 .submitButton4{
-
-}
-.submitButton4{
 display: block;
 border-radius: 10px;
 border: 1px solid black;
@@ -1474,6 +1478,8 @@ height : 45px;
 text-align: center;
 margin-right : 10px ;
 }
+
+
 .sendOrBack{
 display :flex;
 position : absolute;
@@ -1632,9 +1638,7 @@ position: relative;
 top: 40px;
 right: 308px;
 }
-.Confirmation2{
-margin-top:-10px ;
-}
+
 
 
 
@@ -1673,20 +1677,23 @@ margin-top: -20px;
 margin-top: -10px;
 }
 
-}
+
 .Confirmation2 {
-font-size: 9px;
-margin-left: 10px;
-padding: 0px 0px 0px 0px;
+  font-size: 19px;
+  margin-left: 4px;
+  padding: 0px 0px 0px 0px;
+}
+.Confirmation2{
+  margin-top:-10px ;
 }
 
 
-}
+
 
 .Confirmation3{
 font-size: 19px;
 margin-top: 10px;
-margin-left: 10px;
+margin-left: -26px;
 padding: 0px 0px 0px 30px;
 }
 .Confirmation3{
@@ -1694,7 +1701,7 @@ margin-top: -6px;
 }
 
 
-}
+
 .Confirmation4{
 font-size: 19px;
 margin-top: -9px;
@@ -1765,11 +1772,11 @@ padding-right : 20px;
 /**word-break: break-word; 入力が側ではなく、出力側に入れる*/
 
 
-.contentOfTransmission2{
+.contentOfTransmission2 {
 position: absolute;
-top: 125px;
+top: 166px;
 left: 250px;
-height: 920px;
+height: 864px;
 width: 800px;
 border: solid 0.1px rgba(1, 1, 1, 0.2);
 border-radius: 15px;
