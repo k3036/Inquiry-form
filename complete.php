@@ -1,4 +1,9 @@
-<?php session_start();?>
+<?php
+/**入力値のリセット */
+session_start();
+$_SESSION = array();
+session_destroy();
+?>
 <!DOCTYPE html>
 <html>
 
@@ -7,7 +12,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=google">
   <meta name="viewport" content="width = device - width=device-width, initial-scale = 1.0">
   <title>thankYouForYourInquiry</title>
-  <link rel="stylesheet" href="form0css.php">
+  <link rel="stylesheet" href="form.css">
   <style type="text/css">
   body {
     margin: 0;
