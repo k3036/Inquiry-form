@@ -1,4 +1,31 @@
-<?php session_start();?>
+<?php
+session_start();
+// $_SESSION["chineseCharacterName"] = "" ;
+	// リダイレクトを実行
+if( empty($_POST["chineseCharacterName"] ) && empty($_POST["howToRead"])  && empty($_POST["emailAddress"] )  && empty($_POST["contentsOfInquiry"] ) )  {
+  /*初回値空のとき何もしない*/
+}else if( !$_POST["chineseCharacterName"]  && !$_POST["howToRead"]  && !$_POST["emailAddress"]  && !$_POST["contentsOfInquiry"]  ) {
+  /*戻ってきて空だった場合*/
+}else if( $_POST["chineseCharacterName"] && $_POST["howToRead"] && $_POST["emailAddress"] && $_POST["contentsOfInquiry"] ) {
+  $_SESSION["chineseCharacterName"]	= $_POST["chineseCharacterName"];		//お名前 右が左に入。
+  $_SESSION["howToRead"]	= $_POST["howToRead"];
+  $_SESSION["emailAddress"]	= $_POST["emailAddress"];
+  $_SESSION["contentsOfInquiry"]	= $_POST["contentsOfInquiry"];
+  if( !$_POST["phoneNumber"]  ){
+    unset($_SESSION["phoneNumber"]) ;
+  }else{
+    $_SESSION["phoneNumber"]	= $_POST["phoneNumber"];
+  }
+    header("Location: confirm.php") ;
+  // exit ;
+}
+
+
+
+
+
+/** print_r($_POST); *//** header("Location: confirm.php") ; → 指定ページに飛ばすコード */
+?>
 <!DOCTYPE html>
 <html>
 
@@ -65,14 +92,19 @@
         </div>
       </div>
 
-      <form method="POST" action="confirm.php" name="inputScreen">
+      <form method="POST" action="inquiryScreen.php" name="inquiryScreen.php">
         <div class="entryName">
           <input value="<?php
           /**下記if文の記述で初回値なしの際のエラーを消す。これで履歴ができた際のみ反応する。 */
               if(empty($_SESSION["chineseCharacterName"])){
-
+                $result = "";
+                if (isset($_POST['send']) && empty($_SESSION["chineseCharacterName"])) {/** 送信buttonを押したときに発火 → isset($_POST['buttonの name 名']) */
+                    $result = "※氏名は必須入力です。１０文字以内でご入力ください。";
+                    echo $result ;
+                }
               }else if(mb_strlen($_SESSION["chineseCharacterName"])>10){
-
+                $result = "※氏名は,１０文字以内でご入力ください。";
+                echo $result ;
               }else if( isset($_SESSION["chineseCharacterName"])){
                 echo $_SESSION["chineseCharacterName"] ;/**値が入っていれば出力 */
               }
@@ -84,9 +116,14 @@
           <input value="<?php
           /**下記if文の記述で初回値なしの際のエラーを消す。これで履歴ができた際のみ反応する。 */
               if(empty($_SESSION["howToRead"])){
-
+                $result = "";
+                if (isset($_POST['send']) && empty($_SESSION["howToRead"])) {
+                    $result = "※フリガナは必須入力です。１０文字以内でご入力ください。";
+                    echo $result ;
+                }
               }else if(mb_strlen($_SESSION["howToRead"])>10){
-
+                $result = "※フリガナは,１０文字以内でご入力ください。";
+                echo $result ;
               }else if( isset($_SESSION["howToRead"])){
                 echo $_SESSION["howToRead"] ;/**値が入っていれば出力 */
               }
@@ -110,7 +147,11 @@
           <?php          /**下記if文の記述で初回値なしの際のエラーを消す。これで履歴ができた際のみ反応する。 */
           $pattern = "/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:.[a-zA-Z0-9-]+)*$/";
               if(empty($_SESSION["emailAddress"])){
-
+                $result = "";
+                if (isset($_POST['send']) && empty($_SESSION["emailAddress"])) {
+                    $result = "※メールアドレスは必須入力です。";
+                    echo $result ;
+                }
               }else if ($_SESSION["emailAddress"] === $pattern ){
 
               }else if( isset($_SESSION["emailAddress"])){
@@ -120,7 +161,8 @@
         </div>
 
         <div class="detail">
-          <textarea class="entryDetail" type="" name="contentsOfInquiry" id="contentsOfInquiry"></textarea>
+          <textarea class="entryDetail" name="contentsOfInquiry"
+            id="contentsOfInquiry"><?php if(empty($_SESSION["contentsOfInquiry"])){ $result = ""; if (isset($_POST['send']) && empty($_SESSION["contentsOfInquiry"])) { $result = "※お問い合わせ内容は必須入力です。"; echo $result ; } }else if( isset($_SESSION["contentsOfInquiry"])){ echo $_SESSION["contentsOfInquiry"] ;/**値が入っていれば出力 textareaは改行するとBOX内に変な空白が入る*/} ?></textarea>
         </div>
 
 
@@ -129,7 +171,7 @@
         <p class="howToRead0">フリガナ</p>
         <p class="fillInThePhoneNumber0">電話番号</p>
         <p class="fillInYourEmailAddress0">メールアドレス</p>
-        <button class="submitButton3" type="submit" id="btnSubmit">
+        <button class="submitButton3" type="submit" id="btnSubmit" name="send">
           <p class="sendSize2">送 &nbsp;&nbsp;&nbsp; 信</p>
         </button>
       </form>
