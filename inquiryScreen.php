@@ -1,28 +1,96 @@
 <?php
 session_start();
-// $_SESSION["chineseCharacterName"] = "" ;
+if( empty($_POST["chineseCharacterName"] ) && empty($_POST["howToRead"])  && empty($_POST["emailAddress"] )  && empty($_POST["contentsOfInquiry"] ) &&  empty($_POST["phoneNumber"])){
+
+}else if( empty($_POST["chineseCharacterName"] ) && empty($_POST["howToRead"])  && empty($_POST["emailAddress"] )  && empty($_POST["contentsOfInquiry"] ) &&  $_POST["phoneNumber"]){
+  $_SESSION["phoneNumber"]	= $_POST["phoneNumber"];
+}
 	// リダイレクトを実行
-if( empty($_POST["chineseCharacterName"] ) && empty($_POST["howToRead"])  && empty($_POST["emailAddress"] )  && empty($_POST["contentsOfInquiry"] ) )  {
+else if( empty($_POST["chineseCharacterName"] ) && empty($_POST["howToRead"])  && empty($_POST["emailAddress"] )  && empty($_POST["contentsOfInquiry"] ) )  {
   /*初回値空のとき何もしない*/
 }else if( !$_POST["chineseCharacterName"]  && !$_POST["howToRead"]  && !$_POST["emailAddress"]  && !$_POST["contentsOfInquiry"]  ) {
   /*戻ってきて空だった場合*/
 }else if( $_POST["chineseCharacterName"] && $_POST["howToRead"] && $_POST["emailAddress"] && $_POST["contentsOfInquiry"] ) {
-  $_SESSION["chineseCharacterName"]	= $_POST["chineseCharacterName"];		//お名前 右が左に入。
+  $_SESSION["chineseCharacterName"]	= $_POST["chineseCharacterName"];		//右が左に入。
   $_SESSION["howToRead"]	= $_POST["howToRead"];
   $_SESSION["emailAddress"]	= $_POST["emailAddress"];
   $_SESSION["contentsOfInquiry"]	= $_POST["contentsOfInquiry"];
   if( !$_POST["phoneNumber"]  ){
     unset($_SESSION["phoneNumber"]) ;
-  }else{
-    $_SESSION["phoneNumber"]	= $_POST["phoneNumber"];
   }
     header("Location: confirm.php") ;
   // exit ;
+}else if( $_POST["phoneNumber"] && $_POST["howToRead"] && $_POST["emailAddress"]) {/** 電話 読仮名 アド */
+  $_SESSION["phoneNumber"]	= $_POST["phoneNumber"];
+  $_SESSION["howToRead"]	= $_POST["howToRead"];
+  $_SESSION["emailAddress"]	= $_POST["emailAddress"];
+}else if( $_POST["chineseCharacterName"] && $_POST["howToRead"] && $_POST["emailAddress"]) {/** 名前 読仮名 電話 */
+  $_SESSION["chineseCharacterName"]	= $_POST["chineseCharacterName"];
+  $_SESSION["howToRead"]	= $_POST["howToRead"];
+  $_SESSION["emailAddress"]	= $_POST["emailAddress"];
+}else if( $_POST["chineseCharacterName"] && $_POST["phoneNumber"] && $_POST["emailAddress"]) {/** 名前 電話 アド */
+  $_SESSION["chineseCharacterName"]	= $_POST["chineseCharacterName"];
+  $_SESSION["phoneNumber"]	= $_POST["phoneNumber"];
+  $_SESSION["emailAddress"]	= $_POST["emailAddress"];
+}else if( $_POST["chineseCharacterName"] && $_POST["phoneNumber"] ) {/** 電話  名前  */
+  $_SESSION["chineseCharacterName"]	= $_POST["chineseCharacterName"];
+  $_SESSION["phoneNumber"]	= $_POST["phoneNumber"];
+}else if( $_POST["howToRead"] && $_POST["phoneNumber"] ) {/** 電話 読仮名  */
+  $_SESSION["howToRead"]	= $_POST["howToRead"];
+  $_SESSION["phoneNumber"]	= $_POST["phoneNumber"];
+}else if( $_POST["emailAddress"] && $_POST["phoneNumber"] ) {/** 電話 アド */
+  $_SESSION["emailAddress"]	= $_POST["emailAddress"];
+  $_SESSION["phoneNumber"]	= $_POST["phoneNumber"];
+}else if($_POST["phoneNumber"] ) {/** 電話 アド */
+  $_SESSION["phoneNumber"]	= $_POST["phoneNumber"];
+}else if( $_POST["chineseCharacterName"] && $_POST["howToRead"] && $_POST["emailAddress"]) {/** 名前 読仮名 アド */
+  $_SESSION["chineseCharacterName"]	= $_POST["chineseCharacterName"];
+  $_SESSION["howToRead"]	= $_POST["howToRead"];
+  $_SESSION["emailAddress"]	= $_POST["emailAddress"];
+}else if( $_POST["chineseCharacterName"] && $_POST["howToRead"] && $_POST["contentsOfInquiry"] ) {/** 名前、読仮名、お問合せ内容*/
+  $_SESSION["chineseCharacterName"]	= $_POST["chineseCharacterName"];
+  $_SESSION["howToRead"]	= $_POST["howToRead"];
+  $_SESSION["contentsOfInquiry"]	= $_POST["contentsOfInquiry"] ;
+}else if( $_POST["emailAddress"] && $_POST["howToRead"] && $_POST["contentsOfInquiry"] ) {/**アド、読み仮名、お問合せ内容 */
+  $_SESSION["emailAddress"]	= $_POST["emailAddress"];
+  $_SESSION["howToRead"]	= $_POST["howToRead"];
+  $_SESSION["contentsOfInquiry"]	= $_POST["contentsOfInquiry"] ;
+}else if( $_POST["emailAddress"] && $_POST["chineseCharacterName"] && $_POST["contentsOfInquiry"] ) {/**アド、名前、お問合せ内容    ☆各３種類づつで一周*/
+  $_SESSION["emailAddress"]	= $_POST["emailAddress"];
+  $_SESSION["chineseCharacterName"]	= $_POST["chineseCharacterName"];
+  $_SESSION["contentsOfInquiry"]	= $_POST["contentsOfInquiry"] ;
+}else if( $_POST["chineseCharacterName"] && $_POST["howToRead"] ) {/** 名前 読仮名  */
+  $_SESSION["chineseCharacterName"]	= $_POST["chineseCharacterName"];
+  $_SESSION["howToRead"]	= $_POST["howToRead"];
+}else if( $_POST["chineseCharacterName"] && $_POST["emailAddress"]) {/** 名前  アド */
+  $_SESSION["chineseCharacterName"]	= $_POST["chineseCharacterName"];
+  $_SESSION["emailAddress"]	= $_POST["emailAddress"];
+}else if( $_POST["chineseCharacterName"] && $_POST["contentsOfInquiry"]) {/** 名前 お問合せ内容 */
+  $_SESSION["chineseCharacterName"]	= $_POST["chineseCharacterName"];
+  $_SESSION["contentsOfInquiry"]	= $_POST["contentsOfInquiry"] ;
+}else if( $_POST["howToRead"] && $_POST["emailAddress"] ) {/**  読仮名、アド  *//** 読仮名、名前  */
+  $_SESSION["howToRead"]	= $_POST["howToRead"];
+  $_SESSION["emailAddress"]	= $_POST["emailAddress"];
+}else if( $_POST["howToRead"] && $_POST["contentsOfInquiry"] ) {/**  読仮名、お問合せ内容 */
+  $_SESSION["howToRead"]	= $_POST["howToRead"];
+  $_SESSION["contentsOfInquiry"]	= $_POST["contentsOfInquiry"] ;
+}else if( $_POST["howToRead"] && $_POST["emailAddress"] ) {/**アド,読仮名  *//** アド,名前 */
+  $_SESSION["howToRead"]	= $_POST["howToRead"];
+  $_SESSION["emailAddress"]	= $_POST["emailAddress"];
+}else if( $_POST["contentsOfInquiry"] && $_POST["emailAddress"] ) {/**アド,お問合せ内容*/
+  $_SESSION["contentsOfInquiry"]	= $_POST["contentsOfInquiry"];
+  $_SESSION["emailAddress"]	= $_POST["emailAddress"];
+}else if($_POST["chineseCharacterName"]){
+  $_SESSION["chineseCharacterName"]	= $_POST["chineseCharacterName"];
+}else if($_POST["howToRead"]){
+  $_SESSION["howToRead"]	= $_POST["howToRead"];
+}else if($_POST["emailAddress"]){
+  $_SESSION["emailAddress"]	= $_POST["emailAddress"];
+}else if($_POST["contentsOfInquiry"]){
+  $_SESSION["contentsOfInquiry"]	= $_POST["contentsOfInquiry"];
+}else if($_POST["phoneNumber"]){
+  $_SESSION["phoneNumber"]	= $_POST["phoneNumber"];
 }
-
-
-
-
 
 /** print_r($_POST); *//** header("Location: confirm.php") ; → 指定ページに飛ばすコード */
 ?>
