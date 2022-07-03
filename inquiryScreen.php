@@ -94,7 +94,8 @@ if( empty($_POST["chineseCharacterName"] ) && empty($_POST["howToRead"])  && emp
 
       <form method="POST" action="inquiryScreen.php" name="inquiryScreen.php">
         <div class="entryName">
-          <input value="<?php
+          <div class="nameNote">
+            <?php
           /**下記if文の記述で初回値なしの際のエラーを消す。これで履歴ができた際のみ反応する。 */
               if(empty($_SESSION["chineseCharacterName"])){
                 $result = "";
@@ -105,46 +106,53 @@ if( empty($_POST["chineseCharacterName"] ) && empty($_POST["howToRead"])  && emp
               }else if(mb_strlen($_SESSION["chineseCharacterName"])>10){
                 $result = "※氏名は,１０文字以内でご入力ください。";
                 echo $result ;
-              }else if( isset($_SESSION["chineseCharacterName"])){
-                echo $_SESSION["chineseCharacterName"] ;/**値が入っていれば出力 */
               }
-            ?>" class=" entryPlace" type=" text" placeholder="山田 太郎" id="chineseCharacterName"
+            ?>
+          </div>
+          <input value="<?php  if( isset($_SESSION["chineseCharacterName"])){
+                echo $_SESSION["chineseCharacterName"] ;/**値が入っていれば出力 */
+              } ?>" class=" entryPlace" type=" text" placeholder="山田 太郎" id="chineseCharacterName"
             name="chineseCharacterName">
         </div>
 
         <div class="entryName2">
-          <input value="<?php
-          /**下記if文の記述で初回値なしの際のエラーを消す。これで履歴ができた際のみ反応する。 */
-              if(empty($_SESSION["howToRead"])){
-                $result = "";
-                if (isset($_POST['send']) && empty($_SESSION["howToRead"])) {
-                    $result = "※フリガナは必須入力です。１０文字以内でご入力ください。";
-                    echo $result ;
-                }
-              }else if(mb_strlen($_SESSION["howToRead"])>10){
-                $result = "※フリガナは,１０文字以内でご入力ください。";
-                echo $result ;
-              }else if( isset($_SESSION["howToRead"])){
-                echo $_SESSION["howToRead"] ;/**値が入っていれば出力 */
-              }
-            ?>" class="entryPlace" type=" text" name="howToRead" placeholder="ヤマダタロウ" id="howToRead">
+          <div class="phoneticNote">
+            <?php
+                      /**下記if文の記述で初回値なしの際のエラーを消す。これで履歴ができた際のみ反応する。 */
+                      if(empty($_SESSION["howToRead"])){
+                        $result = "";
+                        if (isset($_POST['send']) && empty($_SESSION["howToRead"])) {
+                            $result = "※フリガナは必須入力です。１０文字以内でご入力ください。";
+                            echo $result ;
+                        }
+                      }else if(mb_strlen($_SESSION["howToRead"])>10){
+                        $result = "※フリガナは,１０文字以内でご入力ください。";
+                        echo $result ;
+                      }
+            ?>
+          </div>
+          <input value="<?php if( isset($_SESSION["howToRead"])){ echo $_SESSION["howToRead"] ;/**値が入っていれば出力 */ }?>"
+            class="entryPlace" type=" text" name="howToRead" placeholder="ヤマダタロウ" id="howToRead">
         </div>
 
         <div class="entryNumber">
-          <input value="<?php
-          /**下記if文の記述で初回値なしの際のエラーを消す。これで既定の履歴ができた際のみ反応する。 */
-              if(empty($_SESSION["phoneNumber"])){
+          <div class="phoneNumberNote">
+            <?php           /**下記if文の記述で初回値なしの際のエラーを消す。これで既定の履歴ができた際のみ反応する。 */
+                      if(empty($_SESSION["phoneNumber"])){
 
-              }else if(!preg_match('/^0$|^-?[0-9][0-9]*$/', $_SESSION["phoneNumber"]	)){/**電話番号が半角数字0-9じゃなければ表示しない */
-              }else if( isset($_SESSION["phoneNumber"])){
-                echo $_SESSION["phoneNumber"] ;/**値が入っていれば出力 */
-              }/*else{/**入っていなければ空 }*/
-            ?>" class="entryPlace" type=" tel" name="phoneNumber" placeholder="09012345678" id="phoneNumber">
+                      }else if(!preg_match('/^0$|^-?[0-9][0-9]*$/', $_SESSION["phoneNumber"]	)){/**電話番号が半角数字0-9じゃなければ表示しない */
+                        echo "※電話番号は、半角数字0-9でご入力ください。" ;
+                      }
+              ?>
+          </div>
+          <input
+            value="<?php if( isset($_SESSION["phoneNumber"])){echo $_SESSION["phoneNumber"] ;/**値が入っていれば出力 */}/*else{/**入っていなければ空 }*/?>"
+            class="entryPlace" type=" tel" name="phoneNumber" placeholder="09012345678" id="phoneNumber">
         </div>
 
         <div class="entryAddress">
-          <input value="
-          <?php          /**下記if文の記述で初回値なしの際のエラーを消す。これで履歴ができた際のみ反応する。 */
+          <div class="EmailAddressIsRequired">
+            <?php          /**下記if文の記述で初回値なしの際のエラーを消す。これで履歴ができた際のみ反応する。 */
           $pattern = "/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:.[a-zA-Z0-9-]+)*$/";
               if(empty($_SESSION["emailAddress"])){
                 $result = "";
@@ -154,15 +162,22 @@ if( empty($_POST["chineseCharacterName"] ) && empty($_POST["howToRead"])  && emp
                 }
               }else if ($_SESSION["emailAddress"] === $pattern ){
 
-              }else if( isset($_SESSION["emailAddress"])){
-                echo $_SESSION["emailAddress"] ;/**値が入っていれば出力 */
               }
-            ?>" class="entryPlace" type="email" name="emailAddress" placeholder="test@test.co.jp" id="emailAddress">
+            ?>
+          </div>
+          <input
+            value="<?php if( isset($_SESSION["emailAddress"])){echo $_SESSION["emailAddress"] ;/**値が入っていれば出力 */} ?>"
+            class="entryPlace" type="email" name="emailAddress" placeholder="test@test.co.jp" id="emailAddress">
         </div>
 
         <div class="detail">
+          <div class="theContentOfYourInquiryIsEssential">
+            <?php
+            if(empty($_SESSION["contentsOfInquiry"])){ $result = ""; if (isset($_POST['send']) && empty($_SESSION["contentsOfInquiry"])) { $result = "※お問い合わせ内容は必須入力です。"; echo $result ; } }
+            ?>
+          </div>
           <textarea class="entryDetail" name="contentsOfInquiry"
-            id="contentsOfInquiry"><?php if(empty($_SESSION["contentsOfInquiry"])){ $result = ""; if (isset($_POST['send']) && empty($_SESSION["contentsOfInquiry"])) { $result = "※お問い合わせ内容は必須入力です。"; echo $result ; } }else if( isset($_SESSION["contentsOfInquiry"])){ echo $_SESSION["contentsOfInquiry"] ;/**値が入っていれば出力 textareaは改行するとBOX内に変な空白が入る*/} ?></textarea>
+            id="contentsOfInquiry"><?php if( isset($_SESSION["contentsOfInquiry"])){ echo $_SESSION["contentsOfInquiry"] ;/**値が入っていれば出力 textareaは改行するとBOX内に変な空白が入る*/} ?></textarea>
         </div>
 
 
@@ -184,9 +199,9 @@ if( empty($_POST["chineseCharacterName"] ) && empty($_POST["howToRead"])  && emp
     <div class="footerMove"><?php include "footer.php";?>
     </div>
   </div>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+  <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"
     integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-  <script src="form0main.js"></script>
+  <script src="form0main.js"></script> -->
 </body>
 
 </html>
