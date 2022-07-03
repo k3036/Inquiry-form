@@ -1701,14 +1701,41 @@ margin-top: -6px;
 }
 
 
-
+/* entryDetail Confirmation4*/
 .Confirmation4{
-font-size: 19px;
+font-size: 20px;
 margin-top: -9px;
 text-align: left;
 margin-left: 10px;
 white-space: normal ;
 }
+/* entryDetail Confirmation4*/
+.entryDetail{
+  position: relative;
+  height: 200px;/** */
+  width : 750px;
+  top :312px ;
+  font-size : 20px;
+  border-radius: 10px;
+  border: solid 0.1px rgba(1, 1, 1, 0.2);
+  resize: none;
+  overflow: hidden;
+  word-break: break-word;
+  padding-left : 20px;
+  padding-right : 20px;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
 .submitButton5{
 display:block;
 border-radius: 10px;
@@ -1751,20 +1778,7 @@ top: 100px;
 word-break: break-word;
 }
 
-.entryDetail{
-position: relative;
-height: 200px;/** */
-width : 750px;
-top :312px ;
-font-size : 20px;
-border-radius: 10px;
-border: solid 0.1px rgba(1, 1, 1, 0.2);
-resize: none;
-overflow: hidden;
-word-break: break-word;
-padding-left : 20px;
-padding-right : 20px;
-}
+
 /* white-space: ➡ ・normal ・pre ・nowrap ・pre-wrap ・pre-line テキストの折り返しと空白文字の設定 */
 /** word-break: break-all ; */
 
@@ -1784,3 +1798,58 @@ padding-left: 30px;
 padding-right: 30px;
 word-break: break-word;
 }
+
+.nameNote{
+position: absolute;
+top: 64px;
+left : 360px ;
+color:red ;
+font-weight: bold;
+}
+.phoneticNote{
+  position: absolute;
+  top: 64px;
+  left : 331px ;
+  color:red ;
+  font-weight: bold;
+  }
+  .phoneNumberNote{
+    position: absolute;
+    top: 64px;
+    left : 435px ;
+    color:red ;
+    font-weight: bold;
+    }
+    .EmailAddressIsRequired{
+      position: absolute;
+      top: 64px;
+      left : 524px ;
+      color:red ;
+      font-weight: bold;
+      }
+    .theContentOfYourInquiryIsEssential{
+      position: absolute;
+      top: 290px;
+      left : 510px ;
+      color:red ;
+      font-weight: bold;
+      }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
