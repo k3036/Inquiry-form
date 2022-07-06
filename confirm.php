@@ -18,7 +18,7 @@
 
 <body>
   <?php
-    include "inquiryHeader2.php";
+    include "inquiryHeader3.php";
     ?>
 
 
@@ -26,11 +26,10 @@
     <div class="contentOfTransmission2">
       <p class="inquiry">お問い合わせ</p>
       <div class="inquiryLine"></div>
-      <p class=Notes0>下記の内容をご確認の上送信ボタンを押してください</p>
-      <p class=Notes1>内容を訂正する場合は戻るを押してください。</p>
-
-
-
+      <div class="sendOrReturn">
+        <p class=Notes0>下記の内容をご確認の上送信ボタンを押してください</p>
+        <p class=Notes1>内容を訂正する場合は戻るを押してください。</p>
+      </div>
       <form method="POST" action="complete.php">
         <?php
           /*session_start();
@@ -38,7 +37,7 @@
           echo $session_id;*/
 
 
-        /*  $referer = $_SERVER["HTTP_REFERER"];   ダイレクトアクセスの禁止
+          $referer = $_SERVER["HTTP_REFERER"];   /*ダイレクトアクセスの禁止*/
           $url = 'inquiryScreen.php';
             if(!strstr($referer,$url)){
               die("正規の画面からアクセスしてください");
@@ -52,7 +51,7 @@
           /**ファイルの先頭部に書かないとエラーが出る。 */
           function XssOCuntermeasure($XssMeasures)
           {
-              echo htmlspecialchars($XssMeasures, ENT_QUOTES, "UTF-8") ;
+              echo nl2br(htmlspecialchars($XssMeasures, ENT_QUOTES, "UTF-8")) ;
           }
         ?>
 
@@ -135,21 +134,16 @@
       </div>
 
     </div>
-
-
-
-
   </main>
-  <div class=inquiryFooter2>
-    <div class=" FooterLine2">
-    </div>
-    <div class="FooterList2"></div>
-    <div class="footerMove"><?php include "footer.php";?>
-    </div>
-  </div>
-  <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+
+
+  <div class="FooterList"></div>
+  </main>
+  <div class="FooterLine"></div>
+  <?php include "footer.php";?>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"
     integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-  <script src="form0main.js"></script> -->
+  <script src="form0main.js"></script>
 </body>
 
 </html>
