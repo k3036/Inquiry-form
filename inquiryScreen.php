@@ -17,10 +17,23 @@ else if( empty($_POST["chineseCharacterName"] ) && empty($_POST["howToRead"])  &
   $_SESSION["contentsOfInquiry"]	= $_POST["contentsOfInquiry"];
   if( !$_POST["phoneNumber"]  ){
     unset($_SESSION["phoneNumber"]) ;
+  }else if( $_POST["phoneNumber"]){
+    $_SESSION["phoneNumber"]	= $_POST["phoneNumber"];
   }
     header("Location: confirm.php") ;
   // exit ;
-}else if( $_POST["phoneNumber"] && $_POST["howToRead"] && $_POST["emailAddress"]) {/** 電話 読仮名 アド */
+}
+
+
+// else if($_POST["chineseCharacterName"] && empty($_POST["contentsOfInquiry"] )){/**追加！フリガナ、番号、メアドがある状態で名前だけ追記 */
+//   $_SESSION["chineseCharacterName"]	= $_POST["chineseCharacterName"];
+// }                                                                                /**しかし、これを入れるとJS止めたとき */
+// else if($_POST["contentsOfInquiry"] && empty($_POST["chineseCharacterName"] )){/**追加！フリガナ、番号、メアドがある状態でお問合せだけ追記 */
+//   $_SESSION["contentsOfInquiry"]	= $_POST["contentsOfInquiry"];
+// }
+
+
+else if( $_POST["phoneNumber"] && $_POST["howToRead"] && $_POST["emailAddress"]) {/** 電話 読仮名 アド */
   $_SESSION["phoneNumber"]	= $_POST["phoneNumber"];
   $_SESSION["howToRead"]	= $_POST["howToRead"];
   $_SESSION["emailAddress"]	= $_POST["emailAddress"];
@@ -138,7 +151,7 @@ else if( empty($_POST["chineseCharacterName"] ) && empty($_POST["howToRead"])  &
   $Within10Characters = 10 ;
     ?>
 
-  <?php include "inquiryHeader2.php";?>
+  <?php include "inquiryHeader3.php";?>
 
   <main>
     <div class="contentOfTransmission">
@@ -149,19 +162,21 @@ else if( empty($_POST["chineseCharacterName"] ) && empty($_POST["howToRead"])  &
         <p class="enter1">送信頂いた件につきましては、当社より折り返しご連絡を差し上げます。</p>
         <p class="enter2">なお、ご連絡までに、お時間を頂く場合もございますので予めご了承ください。 </p>
         <p class="enter3"> は必須項目となります。</p>
-        <p class="asterisk0">*</p>
+        <!-- <p class="asterisk0">*</p> -->
         <p class="asterisk1">*</p>
         <p class="asterisk2">*</p>
         <p class="asterisk3">*</p>
 
 
         <div class="fillInTheFollowingItems2">
-          <p class="enter">下記の項目をご記入の上送信ボタンを押してください</p>
+          <p class="enter5">下記の項目をご記入の上送信ボタンを押してください</p>
         </div>
       </div>
 
       <form method="POST" action="inquiryScreen.php" name="inquiryScreen.php">
         <div class="entryName">
+          <p class="fillInYourName0">氏名</p>
+          <p class="asterisk0">* </p>
           <div class="nameNote">
             <?php
           /**下記if文の記述で初回値なしの際のエラーを消す。これで履歴ができた際のみ反応する。 */
@@ -245,12 +260,12 @@ else if( empty($_POST["chineseCharacterName"] ) && empty($_POST["howToRead"])  &
             ?>
           </div>
           <textarea class="entryDetail" name="contentsOfInquiry"
-            id="contentsOfInquiry"><?php if( isset($_SESSION["contentsOfInquiry"])){ echo $_SESSION["contentsOfInquiry"] ;/**値が入っていれば出力 textareaは改行するとBOX内に変な空白が入る*/} ?></textarea>
+            id="contentsOfInquiry"><?php if( isset($_SESSION["contentsOfInquiry"])){ echo($_SESSION["contentsOfInquiry"]) ;/**値が入っていれば出力 textareaは改行するとBOX内に変な空白が入る  nl2br*/} ?></textarea>
         </div>
 
 
 
-        <p class="fillInYourName0">氏名</p>
+
         <p class="howToRead0">フリガナ</p>
         <p class="fillInThePhoneNumber0">電話番号</p>
         <p class="fillInYourEmailAddress0">メールアドレス</p>
@@ -260,16 +275,13 @@ else if( empty($_POST["chineseCharacterName"] ) && empty($_POST["howToRead"])  &
       </form>
 
   </main>
-  <div class=inquiryFooter>
-    <div class=" FooterLine2">
-    </div>
-    <div class="FooterList2"></div>
-    <div class="footerMove"><?php include "footer.php";?>
-    </div>
-  </div>
-  <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+  <div class="FooterList"></div>
+  </main>
+  <div class="FooterLine"></div>
+  <?php include "footer.php";?>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"
     integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-  <script src="form0main.js"></script> -->
+  <script src="form0main.js"></script>
 </body>
 
 </html>
