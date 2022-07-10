@@ -1,12 +1,3 @@
-/*function checkForm() {
-  if (document.form1.input01.value == "" || document.form1.input02.value == "") {
-    alert("必須項目を入力して下さい。");
-    return false;
-  } else {
-    return true;
-  }
-}*/
-
 jQuery(function () {
   var appear = false;
   var pageTop = $('#page_top');
@@ -32,9 +23,6 @@ jQuery(function () {
     return false;
   });
 });
-
-
-
 
 // ボタン、モダル、モダルの閉じるボタン、オーバーレイを変数に格納、モーダルウィンドウの出力
 let followSpace = document.querySelector('.followSpace');
@@ -86,130 +74,52 @@ space.addEventListener('click', function (e) {
 
 // 画面以外をクリックすると消える。バツけしも消える。
 overlay.addEventListener('click', function () {
-  modal.classList.remove('active');
-  overlay.classList.remove('active');
+    modal.classList.remove('active');
+    overlay.classList.remove('active');
 });
-/**画面サイズにに関わらず画像サイズを固定 */
-document.addEventListener('DOMContentLoaded', function () {
-  const resizeFix = function () {
-    const checkHeight = window.innerWidth / 1920 * 1080;
-    const marginTop = window.innerHeight - checkHeight;
-    const checkWidth = window.innerHeight / 1080 * 1920;
-    const marginLeft = window.innerWidth - checkWidth;
 
-    if (checkHeight > window.innerHeight) { //
-      document.getElementsByClassName('sizeFixed')[0].style.transform = 'scale(' + window.innerHeight / 1080 + ')';
-      document.getElementsByClassName('sizeFixed')[0].style.marginLeft = marginLeft / 2 + 'px';
-      document.getElementsByClassName('sizeFixed')[0].style.marginTop = 0 + 'px';
-    } else {
-      document.getElementsByClassName('sizeFixed')[0].style.transform = 'scale(' + window.innerWidth / 1920 + ')';
-      document.getElementsByClassName('sizeFixed')[0].style.marginLeft = 0 + 'px';
-      document.getElementsByClassName('sizeFixed')[0].style.marginTop = marginTop / 2 + 'px';
-    }
-  }
-
-  resizeFix();
-
-  window.addEventListener('resize', function () {
-    resizeFix();
-  });
-});
 //追従するヘッダーの記述。
-const headerMove = $('header');
-$(window).on("load scroll", function () {
-  if ($(this).scrollTop() > 100 && headerMove.hasClass("isFixed") == false) {
-    headerMove.css("display", "block");
-    headerMove.css({ "top": "-80px" });
-    headerMove.addClass("isFixed");
-    headerMove.css({ "top": 0 }, 600);
-    headerMove.css({ "z-index": "555" });
+  const headerMove = $('header');
+  $(window).on("load scroll", function () {
+    if ($(this).scrollTop() > 100 && headerMove.hasClass("isFixed") == false) {
+        headerMove.css("display", "block");
+        headerMove.css({ "top": "-80px" });
+        headerMove.addClass("isFixed");
+        headerMove.css({ "top": 0 }, 600);
+        headerMove.css({ "z-index": "555" });
   }
-  else if ($(this).scrollTop() < 80 && headerMove.hasClass("isFixed") == true) {
-    headerMove.removeClass("isFixed");
-    headerMove.css("display", "none");
+    else if ($(this).scrollTop() < 80 && headerMove.hasClass("isFixed") == true) {
+        headerMove.removeClass("isFixed");
+        headerMove.css("display", "none");
   }
 })
 
-window.addEventListener('scroll', function () {
-  window.scrollY;
-});
+// window.addEventListener('scroll', function () {
+//   window.scrollY;
+// });
 
+  window.addEventListener('load', (event) => {
 
+    document.querySelectorAll('a[href^="#"]').forEach(e => e.addEventListener('click', function(e){
 
-window.onload = function () {
-  const btnSubmit = document.getElementById('btnSubmit');
-  const chineseCharacterName = document.getElementById('chineseCharacterName');
-  const howToRead = document.getElementById('howToRead');
-  const phoneNumber = document.getElementById('phoneNumber');
-  const emailAddress = document.getElementById('emailAddress');
-  const contentsOfInquiry = document.getElementById('contentsOfInquiry');
+      //a要素のクリックイベントをキャンセル。
+      e.preventDefault();
 
-  btnSubmit.addEventListener('click', function (event) {
-    /*let message = [];*/
-    /*入力値チェック*/
+      //a要素が持つhref属性の値を取得。（#content1のように先頭に#が付いた状態で取得される。）
+      let target = e.target.getAttribute("href");
 
-    if (!phoneNumber.value.match(/^([0-9]{0,})$/)) {
-      alert('電話番号入力の際は、（0～9）の数字で入力してください。');
-      event.preventDefault();
-    }
-    /**  match(/^([0-9]{0,})$/)   [0-9]は0～9までの数字、 {0,}は文字数（桁数）、{5,}なら５文字以上   */
+      //指定した要素までの距離を取得。
+      let targetTop = document.querySelector(target).getBoundingClientRect().top  + window.pageYOffset;
 
+      let scrollOptions = {
+        left: 0,
+        top: targetTop,
+        behavior: 'smooth'
+      }
 
-    if (chineseCharacterName.value == "" && howToRead.value == "" && emailAddress.value == "" && contentsOfInquiry.value == "") {
-      alert("必須項目、氏名とフリガナとメールアドレスとお問い合わせ内容が未入力です。");
-      /*document.getElementById("btnSubmit").disabled = true;*/
-      event.preventDefault();/**エラー発生時にページ移換せずに再度入力できるようにする */
-    } else if (chineseCharacterName.value == "" && howToRead.value == "" && emailAddress.value == "") {
-      alert("必須項目、氏名とフリガナとメールアドレスが未入力です。");
-      /*document.getElementById("btnSubmit").disabled = true;*/
-      event.preventDefault();/**エラー発生時にページ移換せずに再度入力できるようにする */
-    } else if (chineseCharacterName.value == "" && emailAddress.value == "" && contentsOfInquiry.value == "") {
-      alert("必須項目、氏名とメールアドレスとお問い合わせ内容が未入力です。");
-      /*document.getElementById("btnSubmit").disabled = true;*/
-      event.preventDefault();/**エラー発生時にページ移換せずに再度入力できるようにする */
-    }
-    else if (chineseCharacterName.value == "" && contentsOfInquiry.value.value == "" && emailAddress.value == "") {
-      alert("必須項目、氏名とメールアドレスとお問い合わせ内容が未入力です。");
-      /*document.getElementById("btnSubmit").disabled = true;*/
-      event.preventDefault();/**エラー発生時にページ移換せずに再度入力できるようにする */
-    } else if (contentsOfInquiry.value == "" && howToRead.value == "" && emailAddress.value == "") {
-      alert("必須項目、フリガナとメールアドレスとお問い合わせ内容が未入力です。");
-      /*document.getElementById("btnSubmit").disabled = true;*/
-      event.preventDefault();/**エラー発生時にページ移換せずに再度入力できるようにする */
-    } else if (chineseCharacterName.value == "" && howToRead.value == "" && contentsOfInquiry.value == "") {
-      alert("必須項目、氏名とフリガナとお問い合わせ内容が未入力です。");
-      event.preventDefault();/**エラー発生時にページ移換せずに再度入力できるようにする */
-    } else if (chineseCharacterName.value == "" && howToRead.value == "") {
-      alert("必須項目、氏名とフリガナが未入力です。");
-      event.preventDefault();/**エラー発生時にページ移換せずに再度入力できるようにする */
-    } else if (chineseCharacterName.value == "" && emailAddress.value == "") {
-      alert("必須項目、氏名とアドレスが未入力です。");
-      event.preventDefault();/**エラー発生時にページ移換せずに再度入力できるようにする */
-    } else if (emailAddress.value == "" && howToRead.value == "") {
-      alert("必須項目、フリガナとアドレスが未入力です。");
-      event.preventDefault();/**エラー発生時にページ移換せずに再度入力できるようにする */
-    } else if (contentsOfInquiry.value == "" && howToRead.value == "") {
-      alert("必須項目、お問い合わせ内容とフリガナが未入力です。");
-      event.preventDefault();/**エラー発生時にページ移換せずに再度入力できるようにする */
-    } else if (contentsOfInquiry.value == "" && chineseCharacterName.value == "") {
-      alert("必須項目、お問い合わせ内容と氏名が未入力です。");
-      event.preventDefault();/**エラー発生時にページ移換せずに再度入力できるようにする */
-    } else if (contentsOfInquiry.value == "" && emailAddress.value == "") {
-      alert("必須項目、お問い合わせ内容とメールアドレスが未入力です。");
-      event.preventDefault();/**エラー発生時にページ移換せずに再度入力できるようにする */
-    } else if (chineseCharacterName.value == "") {
-      alert("必須項目、氏名が未入力です。");
-      event.preventDefault();/**エラー発生時にページ移換せずに再度入力できるようにする */
-    } else if (howToRead.value == "") {
-      alert("必須項目、フリガナが未入力です。");
-      event.preventDefault();
-    } else if (emailAddress.value == "") {/**空チェックok */
-      alert("必須項目、メールアドレスが未入力です。");
-      event.preventDefault();
-    } else if (contentsOfInquiry.value == "") {
-      alert("必須項目、お問い合わせ内容が未入力です。");
-      event.preventDefault();/**エラー発生時にページ移換せずに再度入力できるようにする */
-    }
+      //指定した要素へスクロールする。
+      window.scrollTo(scrollOptions);
+    }));
 
   });
-}
+
