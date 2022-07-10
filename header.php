@@ -6,14 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=google">
   <meta name="viewport" content="width = device - width=device-width, initial-scale = 1.0">
   <title>form</title>
-  <link rel="stylesheet" href="form0css.php">
+  <link rel="stylesheet" href="form.css">
 </head>
 
 <body>
-
-
   <div class=" class = headMenu1">
-
     <a href="#AtTheBeginning" style=text-decoration:none;>始めに</a>
     &nbsp;&nbsp;&nbsp;&nbsp;
     <a href="#Next" style=text-decoration:none;>体験</a>
