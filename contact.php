@@ -1,3 +1,9 @@
+<?php
+/**入力値のリセット */
+session_start();
+$_SESSION = array();
+session_destroy();
+?>
 <!DOCTYPE html>
 <html>
 
@@ -16,7 +22,7 @@
 </head>
 
 <body>
-  <p class="header0"><a href="">新型コロナウイルスに対する取り組みの最新情報をご案内</a></p>
+  <p class="header0"><a href="" class="corona">新型コロナウイルスに対する取り組みの最新情報をご案内</a></p>
   <div style="text-align: center" class="waitingRoom">
     <img src="cafe\img\eyecatch.jpg" alt="" width="100%" height="700" class="wr">
   </div>
@@ -58,12 +64,10 @@
   </p>
   </div>
   <div class="topMenu1">
-    <p class="example">
-      <a href=" #AtTheBeginning " style=text-decoration:none;>始めに</a>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <a href=" #Next " style=text-decoration:none;>体験</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <a href="inquiryScreen.php" style=text-decoration:none;>お問い合わせ</a>
-    </p>
+    <a href="#AtTheBeginning" style=text-decoration:none;>始めに</a>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <a href="#Next" style=text-decoration:none;>体験</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <a href="inquiryScreen.php" style=text-decoration:none;>お問い合わせ</a>
   </div>
   <header class="header">
 
@@ -77,174 +81,145 @@
 
   <main>
 
-    <P class="createYourFavoriteSpace">
+    <div class="createYourFavoriteSpace">
       <?php
           echo "あなたの" ."</br>";
           echo "好きな空間を作る。" ."</br>";
       ?>
-    </p>
-
+    </div>
     <div class="font0" id="AtTheBeginning">
-      <img src="cafe\img\cafe1.jpg" alt="" width="66px" height="66px" class="fot0">
-      <div class="title0">東京<br>車で15分</div>
+      <div class="tokyo">
+        <img src="cafe\img\cafe1.jpg" alt="" width="66px" height="66px" class="fot0">
+        <p class="accessTitle">東京<br>車で15分</p>
+      </div>
       <br><br>
-      <img src="cafe\img\cafe5.jpg" alt="" width="66px" height="66px" class="fot0">
-      <div class="title1">岡山<br>車で1.5時間</div>
+      <div class="okayama">
+        <img src="cafe\img\cafe5.jpg" alt="" width="66px" height="66px" class="fot0">
+        <p class="accessTitle">岡山<br>車で1.5時間</p>
+      </div>
     </div>
-
     <div class="font1">
-      <img src="cafe\img\cafe2.jpg" alt="" width="66px" height="66px" class="fot0">
-      <div class="title2">神奈川<br>車で30分</div>
+      <div class="Kanagawa">
+        <img src="cafe\img\cafe2.jpg" alt="" width="66px" height="66px" class="fot0">
+        <p class="accessTitle0">神奈川<br>車で30分</p>
+      </div>
       <br><br>
-      <img src="cafe\img\cafe6.jpg" alt="" width="66px" height="66px" class="fot0">
-      <div class="title3">鹿児島<br>車で50分</div>
+      <div class="Kagoshima">
+        <img src="cafe\img\cafe6.jpg" alt="" width="66px" height="66px" class="fot0">
+        <p class="accessTitle0">鹿児島<br>車で50分</p>
+      </div>
     </div>
-
     <div class="font2">
-      <img src="cafe\img\cafe3.jpg" alt="" width="66px" height="66px" class="fot0">
-      <div class="title2">愛知<br>車で1時間</div>
-      <br><br>
-      <img src="cafe\img\cafe7.jpg" alt="" width="66px" height="66px" class="fot0">
-      <div class="title3">沖縄<br>車で2時間</div>
+      <div class="aichi">
+        <img src="cafe\img\cafe3.jpg" alt="" width="66px" height="66px" class="fot0">
+        <p class="accessTitle0">愛知<br>車で1時間</p>
+      </div>
+      <div class="okinawa">
+        <img src="cafe\img\cafe7.jpg" alt="" width="66px" height="66px" class="fot0">
+        <p class="accessTitle0">沖縄<br>車で2時間</p>
+      </div>
     </div>
-
     <div class="font3">
-      <img src="cafe\img\cafe4.jpg" alt="" width="66px" height="66px" class="fot0">
-      <div class="title2">京都<br>車で40分</div>
+      <div class="Kyoto">
+        <img src="cafe\img\cafe4.jpg" alt="" width="66px" height="66px" class="fot0">
+        <p class="title2">京都<br>車で40分</p>
+      </div>
     </div>
 
-    <div class="allFont4">
-      <p class=favoriteLocation>好きなロケーションを選ぼう</p>
-      <div class="sizeFixed">
-        <!-- サイズ固定したい画像 -->
-        <p class=fontClassic>
-          <img src="cafe\img\intro1.jpg" alt="" width="520px" height="320px" class="fot1-0"></img>
+    <div class=favoriteLocation>好きなロケーションを選ぼう</div>
+    <div class="fourTypesOfLocations">
+      <div class=fontClassic>
+        <img src="cafe\img\intro1.jpg" alt="" width="520px" height="320px" class="fot1-0"></img>
         <p class=fontClassicName>クラシック</p>
-        </p>
-        <!-- サイズ固定したい画像 -->
-        <p class=fontBar>
-          <img src="cafe\img\intro2.jpg" alt="" width="520px" height="320px" class="fot1-0"></img>
+      </div>
+      <div class=fontBar>
+        <img src="cafe\img\intro2.jpg" alt="" width="520px" height="320px" class="fot1-0"></img>
         <p class=fontBarName>バー</p>
-        </p>
-        <!-- サイズ固定したい画像 -->
-        <p class=fontCamp>
-          <img src="cafe\img\intro3.jpg" alt="" width="520px" height="320px" class="fot1-0"></img>
+      </div>
+      <div class=fontCamp>
+        <img src="cafe\img\intro3.jpg" alt="" width="520px" height="320px" class="fot1-0"></img>
         <p class=fontCampName>キャンプ</p>
+      </div>
+      <div class=fontResort>
+        <img src="cafe\img\intro4.jpg" alt="" width="520px" height="320px" class="fot1-0"></img>
+        <p class="ResortName">リゾート</p>
+      </div>
+    </div>
+
+    <div class=goToEats>
+      <p class="go">Go To Eats</p>
+      <img src="cafe\img\goto.jpg" alt="" width="93%" height="320px" class="fot0-0"></img>
+      <h1 class="clearBox">
+        <br><br><br>
+        <p class="useTheCampaign">
+          &nbsp; キャンペーンを利用して、全国で食事しよう。<br>
+          &nbsp;&nbsp;いつもと違う景色に囲まれてカラダもココロもリフレッシュ。
         </p>
-        <p class=fontResort>
-          <img src="cafe\img\intro4.jpg" alt="" width="520px" height="320px" class="fot1-0"></img>
+      </h1>
+    </div>
+
+    <section class="ExperienceMakingACafe" id="Next">
+      <div class="MakingACafe">
+        <p class=Experience>カフェ作りを体験しよう</p>
+        <p class=Expert>お店のエキスパートが案内するユニークな体験（直接対面型またはオンライン）。</p>
+      </div>
+      <div class="cooking3">
+        <div class=Cooking0>
+          <img src="cafe\img\exp1.jpg" alt="" class="Size3"></img>
+        </div>
+        <div class=Cooking1>
+          <img src="cafe\img\exp2.jpg" alt="" class="Size3"></img>
+        </div>
+        <div class=Cooking2>
+          <img src="cafe\img\exp3.jpg" alt="" class="Size3"></img>
+        </div>
+      </div>
+      <div class="CookWord3">
+        <div class=CookWord0>
+          ジョブ体験
+        </div>
+        <div class=CookWord1>
+          レシピ体験<br>
+        </div>
+        <div class=CookWord2>
+          プロモーション体験<br>
+        </div>
+      </div>
+      <div class="CookWord32">
+        <p class=CookWord00>
+          カフェカウンターを体験しよう。<br>
+        </p>
+        <p class=CookWord11>
+          美味しいレシピを考えてみよう。
+        </p>
+        <p class=CookWord22>
+          お店の宣伝を手伝ってみよう。<br>
         </p>
       </div>
-      <p class="ResortName">リゾート</p>
-    </div>
+    </section>
 
-    <p class=goToEats>
-      <img src="cafe\img\goto.jpg" alt="" width="93%" height="320px" class="fot1-0"></img>
-    </p>
-    <h1 class="clearBox">
-      <br><br><br>
-      <p class="useTheCampaign">
-        &nbsp; キャンペーンを利用して、全国で食事しよう。<br>
-        &nbsp;&nbsp;いつもと違う景色に囲まれてカラダもココロもリフレッシュ。
-      </p>
-    </h1>
-    <p class="go">Go To Eats</p>
-
-    <div class="ExperienceMakingACafe" id="Next"></div>
-    <div class="MakingACafe">
-      <p class=Experience>カフェ作りを体験しよう</p>
-      <p class=Expert>お店のエキスパートが案内するユニークな体験（直接対面型またはオンライン）。</p>
-    </div>
-
-    <div class="cooking3">
-
-      <p class=Cooking0>
-        <img src="cafe\img\exp1.jpg" alt="" class="Size3"></img>
-      </p>
-
-      <p class=Cooking1>
-        <img src="cafe\img\exp2.jpg" alt="" class="Size3"></img>
-      </p>
-
-      <p class=Cooking2>
-        <img src="cafe\img\exp3.jpg" alt="" class="Size3"></img>
-      </p>
-
-    </div>
-
-    <div class="CookWord3">
-
-      <p class=CookWord0>
-        ジョブ体験<br>
-      </p>
-
-      <p class=CookWord1>
-        レシピ体験<br>
-      </p>
-
-      <p class=CookWord2>
-        プロモーション体験<br>
-      </p>
-
-    </div>
-
-    <div class="CookWord32">
-
-
-      <p class=CookWord00>
-
-        カフェカウンターを体験しよう。<br>
-      </p>
-
-      <p class=CookWord11>
-        美味しいレシピを考えてみよう。
-      </p>
-
-      <p class=CookWord22>
-        お店の宣伝を手伝ってみよう。<br>
-      </p>
-
-    </div>
-
-    <p class=HostsNationwide>
+    <div class=HostsNationwide>
       全国のホストに仲間入りしよう
-    </p>
-
+    </div>
     <div class="Business3">
-
-      <p class=Business>
+      <span class=Business>
         <img src="cafe\img\host1.jpg" alt="" class="Size33"></img>
-      </p>
+        <p class=BusinessWord00>ビジネス</p>
+      </span>
 
-      <p class=CommunityImage>
+      <span class=CommunityImage>
         <img src="cafe\img\host2.jpg" alt="" class="Size33"></img>
-      </p>
-
-      <p class=EatingAround>
+        <p class=BusinessWord00>コミュニティ</p>
+      </span>
+      <span class=EatingAround>
         <img src="cafe\img\host3.jpg" alt="" class="Size33"></img>
-      </p>
-
+        <p class=BusinessWord00>食べ歩き</p>
+      </span>
     </div>
-    <div class="ThreeBusinessmen">
-
-      <p class=BusinessWord00>
-        ビジネス
-      </p>
-
-      <p class=CommunityWord11>
-        コミュニティ
-      </p>
-
-      <p class=EatingAroundWord22>
-        食べ歩き
-      </p>
-
-    </div>
-
-    <div class="FooterList"></div>
   </main>
-  <div class="FooterLine"></div>
-  <?php include "footer.php";?>
+  <div class="FooterListMain"></div>
+  <div class="FooterUp"><?php include "footerTwo.php";?></div>
+  <div class="FooterLineMain"></div>
   <div id="page_top"><a href="" style=text-decoration:none;>
       <p class=JumpTop>Jump To Top</p>
     </a></div>
