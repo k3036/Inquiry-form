@@ -17,16 +17,13 @@ session_destroy();
   body {
     margin: 0;
     padding: 0;
+    text-align: center;
   }
   </style>
 </head>
 
 <body>
-  <?php include "inquiryHeader2.php";?>
-
-
-
-
+  <?php include "inquiryHeader3.php";?>
   <form method=“POST”>
     <?php
         /*session_start();
@@ -48,12 +45,10 @@ session_destroy();
       <a href="contact.php" class="backToTopButton">トップへ戻る</a>
     </div>
   </form>
-
-  <div class=inquiryFooter3>
-    <div class=" FooterLine3"></div>
-    <div class="FooterList3"></div>
-    <?php include "footer.php";?>
-  </div>
+  <div class="FooterList"></div>
+  </main>
+  <div class="FooterLine"></div>
+  <?php include "footerTwo.php";?>
 </body>
 
 </html>
