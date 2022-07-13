@@ -9,9 +9,7 @@
   <link rel="stylesheet" href="inquiryHeaderCss.php">
 </head>
 
-
 <body>
-
   <a href="#AtTheBeginning" style=text-decoration:none;>始めに</a>
   &nbsp;&nbsp;&nbsp;&nbsp;
   <a href="#Next" style=text-decoration:none;>体験</a>
