@@ -109,6 +109,12 @@ if (empty($_SESSION["chineseCharacterName"])&&empty($_SESSION["howToRead"])&&emp
       </script>
       EOM;
     }
+}else if (isset($_POST['send']) && empty($_SESSION["chineseCharacterName"])&&empty($_SESSION["howToRead"])&&empty($_SESSION["emailAddress"])&&empty($_SESSION["contentsOfInquiry"])) {
+  echo <<<EOM
+<script type="text/javascript">
+  alert( "※[氏名、フリガナ、メールアドレス、お問い合わせ内容 ]は必須入力です。" )
+</script>
+EOM;
 } else if (isset($_POST['send']) && empty($_SESSION["howToRead"])&&empty($_SESSION["emailAddress"])&&empty($_SESSION["contentsOfInquiry"])) {
   echo <<<EOM
   <script type="text/javascript">
@@ -194,86 +200,15 @@ if (empty($_SESSION["chineseCharacterName"])&&empty($_SESSION["howToRead"])&&emp
   </script>
   EOM;
 }
-/** 10文字以内のチェック */
-if( empty($_POST["chineseCharacterName"] ) && empty($_POST["howToRead"])){
-
-}else if($_POST["howToRead"] && empty($_POST["emailAddress"])){
-  $_SESSION["howToRead"]	= $_POST["howToRead"];
-}else if(empty($_POST["howToRead"])&& $_POST["emailAddress"]){
-  $_SESSION["emailAddress"]	= $_POST["emailAddress"];
-}else if( empty($_POST["chineseCharacterName"] ) || empty($_POST["howToRead"])){
-
-}else if( empty($_POST["chineseCharacterName"])&& mb_strlen ($_SESSION["howToRead"] ) > 10){
-  echo <<<EOM
-  <script type="text/javascript">
-    alert( "※フリガナは10文字以内で入力して下さい。" )
-  </script>
-  EOM;
-  unset($_SESSION["howToRead"]);
-}else if(mb_strlen ($_SESSION["chineseCharacterName"] ) > 10 && empty($_POST["howToRead"]) ){
-  echo <<<EOM
-  <script type="text/javascript">
-    alert( "※氏名は10文字以内で入力して下さい。" )
-  </script>
-  EOM;
-  unset($_SESSION["chineseCharacterName"]);
-}else if(mb_strlen ($_SESSION["chineseCharacterName"] ) > 10 && mb_strlen ($_SESSION["howToRead"] ) > 10){
-  echo <<<EOM
-  <script type="text/javascript">
-    alert( "※氏名とフリガナは10文字以内で入力して下さい。" )
-  </script>
-  EOM;
-  unset($_SESSION["chineseCharacterName"]);
-  unset($_SESSION["howToRead"]);
-}
-else if(mb_strlen ($_SESSION["chineseCharacterName"] ) > 10){
-  echo <<<EOM
-  <script type="text/javascript">
-    alert( "※氏名は10文字以内で入力して下さい。" )
-  </script>
-  EOM;
-  unset($_SESSION["chineseCharacterName"]);
-}else if(empty("howToReed")){
-
-}else if(mb_strlen ($_SESSION["howToRead"] ) > 10){
-  echo <<<EOM
-  <script type="text/javascript">
-    alert( "※フリガナは10文字以内で入力して下さい。" )
-  </script>
-  EOM;
-  unset($_SESSION["howToRead"]);
-}
 /** 電話番号のチェック */
 if(empty($_SESSION["phoneNumber"])){
 
-}else if(!preg_match('/^0$|^-?[0-9][0-9]*$/', $_SESSION["phoneNumber"]	)){/**電話番号が半角数字0-9じゃなければ表示しない */
+}else if(isset($_POST['send']) && !preg_match('/^0$|^-?[0-9][0-9]*$/', $_SESSION["phoneNumber"]	)){/**電話番号が半角数字0-9じゃなければ表示しない */
   echo <<<EOM
   <script type="text/javascript">
     alert( "※電話番号は、半角数字0-9でご入力ください。" )
   </script>
   EOM;
-  unset($_SESSION["phoneNumber"]);
-}
-
-if(empty($_SESSION["phoneNumber"])){
-
-}else if(!preg_match('/^0$|^-?[0-9][0-9]*$/', $_SESSION["phoneNumber"]	)){/**電話番号が半角数字0-9じゃなければ表示しない */
-  echo <<<EOM
-  <script type="text/javascript">
-    alert( "※電話番号は、半角数字0-9でご入力ください。" )
-  </script>
-  EOM;
-}
-/** メールアドレスのチェック */
-if (empty($_SESSION["emailAddress"])) {
-
-}else if(!filter_var($_SESSION["emailAddress"], FILTER_VALIDATE_EMAIL)){
-  echo <<<EOM
-  <script type="text/javascript">
-  alert ( "※不正な形式のメールアドレスです。" )
-  </script>
-  EOM;
-  unset($_SESSION["emailAddress"]);
 }
 ?>
 <!DOCTYPE html>
@@ -328,6 +263,12 @@ if (empty($_SESSION["emailAddress"])) {
               }else if(mb_strlen($_SESSION["chineseCharacterName"])>10){
                 $result = "※氏名は,１０文字以内でご入力ください。";
                 echo $result ;
+                echo <<<EOM
+                <script type="text/javascript">
+                  alert( "※氏名は10文字以内で入力して下さい。" )
+                </script>
+                EOM;
+                unset($_SESSION["chineseCharacterName"]);
               }
             ?>
           </div>
@@ -347,9 +288,15 @@ if (empty($_SESSION["emailAddress"])) {
                             $result = "※フリガナは必須入力です。１０文字以内でご入力ください。";
                             echo $result ;
                         }
-                      }else if(mb_strlen($_SESSION["howToRead"])>10){
+                      }else if(isset($_POST['send']) && mb_strlen($_SESSION["howToRead"])>10){
                         $result = "※フリガナは,１０文字以内でご入力ください。";
                         echo $result ;
+                        echo <<<EOM
+                        <script type="text/javascript">
+                          alert( "※フリガナは10文字以内で入力して下さい。" )
+                        </script>
+                        EOM;
+                        unset($_SESSION["howToRead"]);
                       }
             ?>
           </div>
@@ -362,9 +309,11 @@ if (empty($_SESSION["emailAddress"])) {
           <div class="phoneNumberNote">
             <?php           /**下記if文の記述で初回値なしの際のエラーを消す。これで既定の履歴ができた際のみ反応する。 */
                       if(empty($_SESSION["phoneNumber"])){
-
-                      }else if(!preg_match('/^0$|^-?[0-9][0-9]*$/', $_SESSION["phoneNumber"]	)){/**電話番号が半角数字0-9じゃなければ表示しない */
-                        echo "※電話番号は、半角数字0-9でご入力ください。" ;
+                        $result ="";
+                      }else if(isset($_POST['send']) && !preg_match('/^0$|^-?[0-9][0-9]*$/', $_SESSION["phoneNumber"]	)){/**電話番号が半角数字0-9じゃなければ表示しない */
+                        $result = "※電話番号は、半角数字0-9でご入力ください。";
+                        echo $result ;
+                        unset($_SESSION["phoneNumber"]);
                       }
               ?>
           </div>
