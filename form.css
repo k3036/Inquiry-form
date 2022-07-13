@@ -198,7 +198,7 @@ p.header0{
   .title2{
     font-weight: bold;
     font-size: 14px;
-    margin-left: 65%;
+    margin-left: 59%;
     text-align: left;
     position: relative;
     top: -74px;
@@ -806,14 +806,14 @@ p.header0{
     text-align: center;
     max-width: 500px;
     width : 86%;
-    height : 580px;
+    height : 520px;
     /*padding: 15px 20px;*/
     background: white;
     /* 位置の調整(真ん中に表示) */
-    position: absolute;
+    position: fixed;
     /*モーダル表示位置*/
     top: 5%;
-    left: 50%;
+    left: 40%;
     transform: translate(0%, 100%);
     /* デフォルトでは非表示にしておく */
     opacity: 0;
@@ -1195,7 +1195,7 @@ p.header0{
   .exampleE{
     position: absolute;
     top: 33px;
-    margin-left:39% ;
+    margin-left:47% ;
   }
 
   .contentOfTransmission{
